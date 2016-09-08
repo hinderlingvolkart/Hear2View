@@ -1,0 +1,22 @@
+{
+  "name": "hear2view",
+  "version": "0.0.1",
+  "description": "See what a blind would hear",
+  "scripts": {
+    "start": "gulp work"
+  },
+  "main": "hear2view.js",
+  "dependencies": {
+    "gulp": "~3.8.6",
+    "gulp-artoo": "*",
+    "gulp-concat": "~2.3.4",
+    "gulp-if": "~1.2.4",
+    "gulp-uglify": "~0.3.1",
+    "gulp-webserver": "~0.5.0",
+    "gulp-rename": "~1.2.0"
+  },
+  "devDependencies": {
+    "gulp-replace": "^0.5.4",
+    "gulp-sass": "^2.3.2"
+  }
+}
