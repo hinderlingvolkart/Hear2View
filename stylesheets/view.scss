@@ -1,0 +1,99 @@
+@import "mixins";
+
+
+// some global reset
+
+body {
+  font: 100%/1.4 "Helvetica Neue", Helvetica, Arial;
+  max-width: 90ex;
+  padding: 20px;
+  margin: 0 auto;
+  background: #f8f8f8;
+}
+img, svg {
+ display: none !important;
+}
+
+a {
+  color: #108AEF;
+  text-decoration: underline;
+}
+
+input, textarea, button, select {
+  font: inherit;
+  background: white;
+}
+
+.screenreader--image {
+  @include section('Image', rgba(255,255,255, 0.5));
+  display: inline-block;
+  min-width: 6em;
+  border: 1px dashed;
+}
+.screenreader--invisible,
+[aria-hidden="true"]:not(#screenreader--focus) {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+#screenreader--defect {
+  opacity: 0.5;
+  box-shadow: inset 0 0 5px white, 0 0 20px rgba(red, 0.5);
+}
+
+
+.screenreader--has-focus:not(html) {
+  opacity: 1;
+  outline: none;
+  position: relative;
+  z-index: 1;
+}
+
+#screenreader--cover {
+  display: block;
+  position: fixed;
+  z-index: 9998;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+}
+
+#screenreader--focus {
+  pointer-events: none;
+  display: block;
+  position: fixed;
+  z-index: 9999;
+  transition: all 150ms;
+  &:before {
+    position: absolute;
+    content: '';
+    top: -10px; bottom: -10px;
+    left: -10px; right: -10px;
+    z-index: 1;
+    border: 1px solid rgba(black, 0.5);
+    box-shadow: inset 0 0 10px white, 0 0 40px rgba(black, 0.2);
+  }
+}
+html:not(.screenreader--has-focus) #screenreader--focus {
+  opacity: 0;
+}
+
+
+
+@import
+  "headings",
+  "buttons",
+  "sections",
+  "tables",
+  "heading-index"
+  ;
+
+
+[role="presentation"] {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font: inherit;
+}
+

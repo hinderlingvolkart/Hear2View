@@ -1,0 +1,28 @@
+table:not(.screenreader--layouttable) {
+	border-collapse: collapse;
+	caption {
+		background-color: #999;
+		font-weight: bold;
+		border: 1px solid;
+		padding: 5px;
+	}
+	td, th {
+		border: 1px solid #999;
+		padding: 5px 8px;
+		text-align: left;
+	}
+	th {
+		font-weight: bold;
+		color: white;
+		background: black;
+	}
+}
+
+table.screenreader--layouttable {
+	&, tbody, tfoot, thead, tr {
+		display: block;
+	}
+	td, th {
+		display: inline;
+	}
+}

@@ -1,0 +1,36 @@
+#screenreader--headings {
+
+	background: white;
+	padding: 20px;
+	border: 10px solid rgba(black, 0.1);
+	margin: 0 0 20px;
+
+	
+	li {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		font-size: 27px;
+		line-height: 22px;
+	}
+	
+
+	a {
+		text-decoration: none;
+		font-size: 16px;
+	}
+	strong {
+		display: inline;
+		font-size: 14px;
+		font-weight: 200;
+		text-transform: normal;
+		background: rgba(#f0f0f0, 0.5);
+		box-shadow: 0 1px 3px rgba(black, 0.2);
+		color: black;
+		padding: 2px 6px;
+		border-radius: 2px;
+		vertical-align: middle;
+		margin-right: 0.5ex;
+
+	}
+}

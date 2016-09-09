@@ -1,0 +1,51 @@
+@mixin afterlabel($name) {
+  &:after {
+    display: inline !important;
+    content: "#{$name}" !important;
+    font-size: 14px;
+    font-weight: 200;
+    text-transform: normal;
+    background: rgba(#f0f0f0, 0.5) !important;
+    box-shadow: 0 1px 3px rgba(black, 0.2);
+    color: black !important;
+    padding: 2px 6px;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-left: 0.5ex;
+  }
+}
+@mixin resetsection {
+  position: static;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  &:before {
+    content: none;
+  }
+}
+@mixin section($name, $color) {
+  display: block;
+  position: relative;
+  background: $color;
+  padding: 30px 10px 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  &:before {
+    display: inline !important;
+    content: "#{$name}" !important;
+    font-size: 10px;
+    font-weight: normal;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 3px 6px;
+    border-radius: 2px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+}

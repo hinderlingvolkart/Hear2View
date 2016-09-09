@@ -1,0 +1,30 @@
+nav, [role="navigation"] {
+  @include section("Navigation", rgba(#c2e5ec, 0.5));
+  border: 1px solid rgba(#71B7C5, 0.5);
+}
+aside, [role="complementary"] {
+  @include section("Complementary", rgba(black, 0.1));
+}
+article, [role="article"] {
+  @include section("Article", rgba(white, 0.5));
+  border: 1px solid rgba(0,0,0,0.2);
+  padding: 40px 20px 20px;
+}
+dialog, [role="dialog"] {
+  @include section("Dialog", rgba(black, 0.1));
+}
+[role="banner"] {
+  @include section("Banner (Page Header)", rgba(black, 0.1));
+}
+
+[role="contentinfo"] {
+  @include section("Content Info (Page Footer)", rgba(black, 0.1));
+}
+[role="search"] {
+  @include section("Search", rgba(black, 0.2));
+}
+main, [role="main"] {
+  @include section("Main", white);
+  border: 1px solid rgba(0,0,0,0.6);
+  padding: 50px 30px 30px;
+}

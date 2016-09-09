@@ -1,0 +1,51 @@
+button, [role="button"], input[type="button"], input[type="submit"] {
+  appearance: none;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 3px 6px;
+  font-family: inherit;
+  background: #032d7b;
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+[aria-selected="true"],
+[aria-expanded="true"] {
+	box-shadow: 0 0 0 1px white, 0 0 20px 3px #8DD906;
+}
+
+
+[title] {
+	&:after {
+		content: attr(title);
+		display: inline !important;
+		font-size: 80%;
+		font-weight: 200;
+		background: rgba(255, 255, 255, 0.5);
+		border: 1px solid;
+		padding: 2px 3px;
+		border-radius: 2px;
+		vertical-align: middle;
+		margin-left: 0.5ex;
+		text-decoration: none;
+	}
+}
+[aria-label] {
+	&:after {
+		content: attr(aria-label);
+		display: inline !important;
+		font-size: 80%;
+		font-weight: 200;
+		background: rgba(255, 255, 255, 0.5);
+		border: 1px solid;
+		padding: 2px 3px;
+		border-radius: 2px;
+		vertical-align: middle;
+		margin-left: 0.5ex;
+		text-decoration: none;
+	}
+}
+
+// Roles: link, checkbox, menuitem, menuitemcheckbox, menuitemradio, radio, tab, switch or treeitem

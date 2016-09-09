@@ -2,16 +2,20 @@ var gulp = require('gulp'),
     gulpif = require('gulp-if'),
     artoo = require('gulp-artoo'),
     sass = require('gulp-sass'),
+    autoprefixer = require('gulp-autoprefixer'),
     rename = require('gulp-rename'),
     webserver = require('gulp-webserver'),
     concat = require('gulp-concat'),
     replace = require('gulp-replace'),
     uglify = require('gulp-uglify'),
+    order = require("gulp-order"),
+    debug = require('gulp-debug'),
     fs = require('fs');
 
 // Files to aggregate
 var files = [
   './templates/*.tpl',
+  './stylesheets/*.scss',
   './stylesheets/*.css',
   './src/*.js'
 ];
@@ -40,7 +44,9 @@ function preBuild() {
   return gulp.src(files)
     .pipe(gulpif('*.tpl', artoo.template()))
     .pipe(gulpif('*.scss', sass()))
+    .pipe(gulpif('*.css', autoprefixer()))
     .pipe(gulpif('*.css', artoo.stylesheet()))
+    .pipe(order(['**/*.css', 'src/*.js']))
     .pipe(concat('hear2view.concat.js'));
 }
 
@@ -59,7 +65,7 @@ gulp.task('bookmark.dev', function() {
       loadingText: null,
       settings: {
         reExec: false,
-        scriptUrl: 'http://localhost:8000/build/hear2view.concat.js',
+        scriptUrl: 'https://localhost:8000/build/hear2view.concat.js',
         env: 'dev'
       }
     }))
@@ -88,7 +94,8 @@ gulp.task('serve', function() {
   gulp.src('./')
     .pipe(webserver({
       directoryListing: true,
-      port: 8000
+      port: 8000,
+      https: true
     }));
 });
 
