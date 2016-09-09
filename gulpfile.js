@@ -36,11 +36,12 @@ gulp.task('html:dev', ['bookmark.dev', 'bookmark.prod'], function() {
   return htmlBuild('dev');
 });
 gulp.task('readme', ['bookmark.dev', 'bookmark.prod'], function() {
-  return gulp.src('src/README.md')
+  return gulp.src('src/bookmarklet.html')
     .pipe(replace('{{bookmarklet}}', function(s) {
         var script = fs.readFileSync('build/hear2view.bookmark.prod.js', 'utf8');
         return 'javascript:' + encodeURIComponent(script);
     }))
+    .pipe(rename('index.html'))
     .pipe(gulp.dest('./'));
 });
 gulp.task('html', ['html:prod', 'html:dev', 'readme']);
