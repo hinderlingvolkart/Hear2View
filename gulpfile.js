@@ -35,7 +35,15 @@ gulp.task('html:prod', ['bookmark.dev', 'bookmark.prod'], function() {
 gulp.task('html:dev', ['bookmark.dev', 'bookmark.prod'], function() {
   return htmlBuild('dev');
 });
-gulp.task('html', ['html:prod', 'html:dev']);
+gulp.task('readme', ['bookmark.dev', 'bookmark.prod'], function() {
+  return gulp.src('src/README.md')
+    .pipe(replace('{{bookmarklet}}', function(s) {
+        var script = fs.readFileSync('build/hear2view.bookmark.prod.js', 'utf8');
+        return 'javascript:' + encodeURIComponent(script);
+    }))
+    .pipe(gulp.dest('./'));
+});
+gulp.task('html', ['html:prod', 'html:dev', 'readme']);
 
 
 
