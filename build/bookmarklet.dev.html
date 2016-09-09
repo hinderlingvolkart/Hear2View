@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Bookmarklet {{version}}</title>
+	<style>
+		body {
+			font:  bold 4vw/1.4 "Helvetica Neue", Helvetica, Arial;
+			padding:  40px;
+			padding:  20vmin;
+			text-align: center;
+		}
+		.emoticon {
+			font: caption;
+			font-size:  4vw;
+		}
+		a {
+			text-decoration: none;
+			border:  1px solid;
+			padding: 5px 8px;
+			border-radius: .2ex;
+		}
+	</style>
+</head>
+<body>
+	<p>
+		Drag this to your bookmarks:
+		<br><br>
+		<a href="javascript:javascript%3A%20(function(t)%7Bvar%20e%3D%7BreExec%3A!1%2CscriptUrl%3A%22https%3A%2F%2Flocalhost%3A8000%2Fbuild%2Fhear2view.concat.js%22%2Cenv%3A%22dev%22%7D%2Co%3D!0%3Bif(%22object%22%3D%3Dtypeof%20this.artoo%26%26(artoo.settings.reload%7C%7C(artoo.log.verbose(%22artoo%20already%20exists%20within%20this%20page.%20No%20need%20to%20inject%20him%20again.%22)%2Cartoo.loadSettings(e)%2Cartoo.exec()%2Co%3D!1))%2Co)%7Bvar%20a%3Ddocument.getElementsByTagName(%22body%22)%5B0%5D%3Ba%7C%7C(a%3Ddocument.createElement(%22body%22)%2Cdocument.documentElement.appendChild(a))%3Bvar%20i%3Ddocument.createElement(%22script%22)%3Bi.src%3D%22%2F%2Fmedialab.github.io%2Fartoo%2Fpublic%2Fdist%2Fartoo-latest.min.js%22%2Ci.type%3D%22text%2Fjavascript%22%2Ci.id%3D%22artoo_injected_script%22%2Ci.setAttribute(%22settings%22%2CJSON.stringify(e))%3Bvar%20r%3DMath.random()%3Bi.src%2B%3D%22%3Fr%3D%22%2Br%2Ca.appendChild(i)%7D%7D).call(this)%3B">See what they hear</a>
+		<br><br>
+		<a class="emoticon" href="javascript:javascript%3A%20(function(t)%7Bvar%20e%3D%7BreExec%3A!1%2CscriptUrl%3A%22https%3A%2F%2Flocalhost%3A8000%2Fbuild%2Fhear2view.concat.js%22%2Cenv%3A%22dev%22%7D%2Co%3D!0%3Bif(%22object%22%3D%3Dtypeof%20this.artoo%26%26(artoo.settings.reload%7C%7C(artoo.log.verbose(%22artoo%20already%20exists%20within%20this%20page.%20No%20need%20to%20inject%20him%20again.%22)%2Cartoo.loadSettings(e)%2Cartoo.exec()%2Co%3D!1))%2Co)%7Bvar%20a%3Ddocument.getElementsByTagName(%22body%22)%5B0%5D%3Ba%7C%7C(a%3Ddocument.createElement(%22body%22)%2Cdocument.documentElement.appendChild(a))%3Bvar%20i%3Ddocument.createElement(%22script%22)%3Bi.src%3D%22%2F%2Fmedialab.github.io%2Fartoo%2Fpublic%2Fdist%2Fartoo-latest.min.js%22%2Ci.type%3D%22text%2Fjavascript%22%2Ci.id%3D%22artoo_injected_script%22%2Ci.setAttribute(%22settings%22%2CJSON.stringify(e))%3Bvar%20r%3DMath.random()%3Bi.src%2B%3D%22%3Fr%3D%22%2Br%2Ca.appendChild(i)%7D%7D).call(this)%3B">👂 → 👀</a>
+</body>
+</html>
