@@ -4,7 +4,7 @@
   // var ui = new artoo.ui({
   //   stylesheets: ['bookmark.css']
   // });
-  // 
+  //
 
   function loadCSSCors(stylesheet_uri) {
     var _xhr = window.XMLHttpRequest;
@@ -33,7 +33,7 @@
     xhr.send();
   }
 
-  
+
   function processStylesheet(value) {
     var items = value.cssRules;
     if (items) {
@@ -86,7 +86,7 @@
 
 
   processStylesheets();
-  
+
   function copyAttr(src, dst) {
     for (var i = 0; i < src.attributes.length; i++) {
       dst.setAttribute(src.attributes[i].name, src.attributes[i].value);
@@ -94,7 +94,11 @@
   }
 
   function processFigure() {
-      var alt = $(this).attr('alt') || $(this).text();
+      var alt = $(this).attr('alt');
+      if (this.nodeName == 'IMG' && alt === '') {
+        return; // don't show images with alt=""
+      }
+      alt = alt || $(this).text();
       var $alt = $('<span>' + alt + '</span>');
       copyAttr(this, $alt.get(0));
       $alt.addClass('screenreader--image');
@@ -138,7 +142,7 @@
   $('[aria-describedby], [aria-labelledby]').each(domProcessor.ariaLabel);
   $('svg').each(domProcessor.svg);
 
-  
+
 
   var headingCounter = 0;
   function getHeadingNav() {
@@ -260,7 +264,7 @@
 
   // zu überwachende Zielnode (target) auswählen
   var target = document;
-   
+
   // eine Instanz des Observers erzeugen
   var observer = new MutationObserver(function(mutations) {
     observer.disconnect(); // ignore our own manipulations
@@ -286,10 +290,10 @@
           }
         }
       }
-    });    
+    });
     observer.observe(target, config);
   });
-   
+
   // Konfiguration des Observers: alles melden - Änderungen an Daten, Kindelementen und Attributen
   var config = {
     attributes: true,
@@ -298,7 +302,7 @@
     characterData: false,
     attributeFilter: ['style']
   };
-   
+
   // eigentliche Observierung starten und Zielnode und Konfiguration übergeben
   observer.observe(target, config);
 
