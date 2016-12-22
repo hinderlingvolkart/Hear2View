@@ -110,10 +110,14 @@
       processStyleRule(this);
     },
     label: function() {
-      var id = $(this).attr('for');
-      var target = document.getElementById(id);
+    },
+    input: function() {
+      var id = this.id;
+      var target = document.querySelector('label[for="' + id + '"]');
       if (!target) {
         $(this).addClass('screenreader--defect');
+      } else {
+        $([this, target]).addClass('screenreader--success');
       }
     },
     ariaLabel: function() {
@@ -140,6 +144,8 @@
   $('table').filter(domProcessor.table);
   $('img, input[type="image"]').each(domProcessor.img);
   $('[aria-describedby], [aria-labelledby]').each(domProcessor.ariaLabel);
+  $('label').each(domProcessor.label);
+  $('input,textarea,select').each(domProcessor.input);
   $('svg').each(domProcessor.svg);
 
 
@@ -190,7 +196,7 @@
 
   $('body').prepend(getHeadingNav());
   $('body').append('<div id="screenreader--focus"></div>');
-  $('body').append('<div id="screenreader--cover"></div>');
+  // $('body').append('<div id="screenreader--cover"></div>');
 
 
   function setFocus(target, focus) {
@@ -254,8 +260,8 @@
       }
     }
   }
-  document.getElementById('screenreader--cover').addEventListener('mousemove', focusByEvent, true);
-  document.getElementById('screenreader--cover').addEventListener('touchstart', focusByEvent, true);
+  document.body.addEventListener('mousemove', focusByEvent, true);
+  document.body.addEventListener('touchstart', focusByEvent, true);
 
   console.log('Bookmarklet is ready');
 
@@ -281,6 +287,12 @@
           } else
           if (node.nodeName == 'IMG') {
             domProcessor.img.call(node);
+          } else
+          if (node.nodeName == 'INPUT' || node.nodeName == 'TEXTAREA' || node.nodeName == 'SELECT') {
+            domProcessor.input.call(node);
+          } else
+          if (node.nodeName == 'LABEL') {
+            domProcessor.label.call(node);
           } else
           if (node.nodeName == 'SVG') {
             domProcessor.svg.call(node);

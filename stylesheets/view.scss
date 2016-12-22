@@ -38,9 +38,12 @@ input, textarea, button, select {
   margin: 0;
   padding: 0;
 }
-#screenreader--defect {
+.screenreader--defect {
   opacity: 0.5;
   box-shadow: inset 0 0 5px white, 0 0 20px rgba(red, 0.5);
+}
+.screenreader--success {
+  box-shadow: inset 0 0 5px rgba(green, 0.25), 0 0 20px rgba(green, 0.25);
 }
 
 
@@ -82,6 +85,8 @@ html:not(.screenreader--has-focus) #screenreader--focus {
 
 
 @import
+  "list",
+  "states",
   "headings",
   "buttons",
   "sections",
@@ -91,6 +96,7 @@ html:not(.screenreader--has-focus) #screenreader--focus {
 
 
 [role="presentation"] {
+  display: inline !important;
   margin: 0;
   padding: 0;
   background: transparent;

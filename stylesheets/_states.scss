@@ -1,3 +1,18 @@
 [aria-selected="true"] {
 	border: 3px solid green;
 }
+
+[role="checkbox"]:before {content: '☐';}
+[role="checkbox"][aria-checked="true"]:before {
+  content: '☒';
+}
+
+[role="radio"]:before {content: '⚪️';}
+[role="radio"][aria-checked="true"]:before {
+  content: '⚫️';
+}
+
+[aria-expanded]:before {content: '➡️';}
+[aria-expanded="true"]:before {content: '⬇️';}
+[aria-expanded] {@include afterlabel('closed')}
+[aria-expanded="true"] {@include afterlabel('expanded')}
