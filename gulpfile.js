@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
-    gulpif = require('gulp-if'),
+    gulpFilter = require('gulp-filter'),
+    gulpIf = require('gulp-if'),
     artoo = require('gulp-artoo'),
     sass = require('gulp-sass'),
     autoprefixer = require('gulp-autoprefixer'),
@@ -50,11 +51,23 @@ gulp.task('html', ['html:prod', 'html:dev', 'readme']);
 
 // Build
 function preBuild() {
+  var tplFilter = gulpFilter('**/*.tpl', {restore: true});
+  var scssFilter = gulpFilter('**/*.scss', {restore: true});
+  var cssFilter = gulpFilter('**/*.css', {restore: true});
   return gulp.src(files)
-    .pipe(gulpif('*.tpl', artoo.template()))
-    .pipe(gulpif('*.scss', sass()))
-    .pipe(gulpif('*.css', autoprefixer()))
-    .pipe(gulpif('*.css', artoo.stylesheet()))
+    .pipe(tplFilter)
+    .pipe(artoo.template())
+    .pipe(tplFilter.restore)
+
+    .pipe(scssFilter)
+    .pipe(gulpIf('*.scss', sass()))
+    .pipe(scssFilter.restore)
+
+    .pipe(cssFilter)
+    .pipe(gulpIf('*.css', autoprefixer()))
+    .pipe(gulpIf('*.css', artoo.stylesheet()))
+    .pipe(cssFilter.restore)
+
     .pipe(order(['**/*.css', 'src/*.js']))
     .pipe(concat('hear2view.concat.js'));
 }
@@ -74,7 +87,7 @@ gulp.task('bookmark.dev', function() {
       loadingText: null,
       settings: {
         reExec: false,
-        scriptUrl: 'https://localhost:8000/build/hear2view.concat.js',
+        scriptUrl: 'http://localhost/hv/HV-Dev/Accessibility/Hear2View/build/hear2view.concat.js',
         env: 'dev'
       }
     }))
