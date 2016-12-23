@@ -1,6 +1,18 @@
 nav, [role="navigation"] {
   @include section("Navigation", rgba(#c2e5ec, 0.5));
   border: 1px solid rgba(#71B7C5, 0.5);
+
+  @media (min-width: 1400px) {
+    float: left;
+    margin-left: -350px;
+    width: 300px;
+    box-sizing: border-box;
+    clear: left;
+  }
+
+  [id^="screenreader--heading"] {
+    margin-top: 0;
+  }
 }
 aside, [role="complementary"] {
   @include section("Complementary", rgba(black, 0.1));

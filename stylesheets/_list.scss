@@ -1,3 +1,62 @@
-ul > li, ol > li {
-  display: list-item !important;
+
+ul > li,
+ol > li,
+[role="list"] > [role="listitem"] {
+  margin-left: 1em;
+  display: block !important;
+  position: relative;
+}
+
+ul > li:before,
+ol > li:before,
+[role="list"] > [role="listitem"]:before {
+  content: '•' !important;
+  position: absolute;
+  left: -1em;
+  top: 0;
+}
+
+
+dl dt {
+  font-weight: bold;
+  display: block !important;
+  margin-top: 1ex;
+}
+
+dl dd {
+  display: block !important;
+  margin-left: 2em;
+}
+
+
+[role="tablist"] {
+  border: 1px solid;
+  [role="tab"] {
+    float: left;
+    display: block;
+    border-right: 1px solid;
+    padding: 4px 10px;
+    border-bottom: 1px solid;
+    margin-bottom: -1px;
+  }
+}
+
+[role="tablist"] {
+  border: 1px solid;
+  padding: 0;
+  display: inline-block !important;
+  border-width: 1px 0 0 1px;
+  [role="tab"] {
+    float: left;
+    border-right: 1px solid;
+    padding: 4px 10px;
+    border-bottom: 1px solid;
+    margin-bottom: -1px;
+  }
+
+}
+[role="tablist"]:after {
+  display: table;
+  content: '';
+  clear: both;
 }

@@ -1,6 +1,6 @@
 @for $i from 1 through 4 {
   h#{$i},
-  [aria-role="heading"][aria-level="#{$i}"] {
+  [role="heading"][aria-level="#{$i}"] {
     @if $i == 1 {
       font-size: 60px;
       @media (max-width: 600px) {
@@ -25,6 +25,9 @@
         font-size: 16px;
       }
     }
-     @include afterlabel('#{$i}');
+    margin-bottom: .5ex;
+    line-height: 1.1;
+
+    @include afterlabel('#{$i}');
   }
 }
