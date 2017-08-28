@@ -17,20 +17,36 @@ button, [role="button"], input[type="button"], input[type="submit"] {
 }
 
 
+[data-screenreader-describedby] {
+  &:after {
+    content: attr(data-screenreader-describedby);
+    display: inline !important;
+    font-size: 80%;
+    font-weight: 200;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid;
+    padding: 2px 3px;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-left: 0.5ex;
+    text-decoration: none;
+    opacity: 0.5;
+  }
+}
 [title] {
-	&:after {
-		content: attr(title);
-		display: inline !important;
-		font-size: 80%;
-		font-weight: 200;
-		background: rgba(255, 255, 255, 0.5);
-		border: 1px solid;
-		padding: 2px 3px;
-		border-radius: 2px;
-		vertical-align: middle;
-		margin-left: 0.5ex;
-		text-decoration: none;
-	}
+  &:after {
+    content: attr(title);
+    display: inline !important;
+    font-size: 80%;
+    font-weight: 200;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid;
+    padding: 2px 3px;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-left: 0.5ex;
+    text-decoration: none;
+  }
 }
 [aria-label] {
 	&:after {

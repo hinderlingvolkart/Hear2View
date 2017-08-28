@@ -6,6 +6,12 @@
   // });
   //
 
+
+  function nodeName(el) {
+    return el.nodeName.toUpperCase();
+  }
+
+
   function loadCSSCors(stylesheet_uri) {
     var _xhr = window.XMLHttpRequest;
     var has_cred = false;
@@ -95,14 +101,46 @@
 
   function processFigure() {
       var alt = $(this).attr('alt');
-      if (this.nodeName == 'IMG' && alt === '') {
-        return; // don't show images with alt=""
+      if (alt === '') {
+        if (nodeName(this) == 'IMG') {
+          return; // don't show images with alt=""
+        }
       }
-      alt = alt || $(this).text();
-      var $alt = $('<span>' + alt + '</span>');
+      alt = alt || getSpokenText(this);
+      var $alt = $('<span></span>');
       copyAttr(this, $alt.get(0));
+      if (!alt) {
+        if (nodeName(this) === 'SVG') {
+          return; // ignore svg without text
+        } else {
+          alt = '???';
+          $alt.addClass('screenreader--defect');
+        }
+      }
+      $alt.text(alt);
       $alt.addClass('screenreader--image');
       $(this).after($alt);
+  }
+
+  function getSpokenText(el) {
+    var $el = $(el);
+    var text;
+    var rel = $el.attr('aria-labelledby');
+    if (rel) {
+      rel = rel.replace(/(\S+)/g, '#$1').replace(/\s+/, ',');
+      text = $(rel).text();
+    }
+    text = text || $el.attr('aria-label') || $el.text();
+    rel = $el.attr('title');
+    text = $.trim(text);
+    if (rel) {
+      if (text) {
+        text += ', ' + rel;
+      } else {
+        text = rel;
+      }
+    }
+    return text;
   }
 
   var domProcessor = {
@@ -121,10 +159,19 @@
       }
     },
     ariaLabel: function() {
-      var id = $(this).attr('aria-labelledby') || $(this).attr('aria-describedby');
-      var target = document.getElementById(id);
+      var id = $(this).attr('aria-labelledby');
+      id = id.replace(/(\S+)/g, '#$1').replace(/\s+/, ',');
+      var target = $(id);
       if (target) {
-        this.setAttribute('aria-label', $(target).text());
+        this.setAttribute('aria-label', target.text());
+      }
+    },
+    ariaDescribed: function() {
+      var id = $(this).attr('aria-describedby');
+      id = id.replace(/(\S+)/g, '#$1').replace(/\s+/, ',');
+      var target = $(id);
+      if (target) {
+        this.setAttribute('data-screenreader-describedby', target.text());
       }
     },
     table: function() {
@@ -143,7 +190,8 @@
   $('[style]').each(domProcessor.style);
   $('table').filter(domProcessor.table);
   $('img, input[type="image"]').each(domProcessor.img);
-  $('[aria-describedby], [aria-labelledby]').each(domProcessor.ariaLabel);
+  $('[aria-labelledby]').each(domProcessor.ariaLabel);
+  $('[aria-describedby]').each(domProcessor.ariaDescribed);
   $('label').each(domProcessor.label);
   $('input,textarea,select').each(domProcessor.input);
   $('svg').each(domProcessor.svg);
@@ -152,7 +200,8 @@
 
   var headingCounter = 0;
   function getHeadingNav() {
-    var html = '<ol id="screenreader--headings">';
+    var html = '<div class="screenreader--header">';
+    html += '<h1>Headings</h1><ol id="screenreader--headings">';
     $('h1, h2, h3, h4, h5, h6, h7, h8, [role="heading"]').each(function() {
       var $heading = $(this);
       if (!$heading.is(':visible')) {
@@ -180,6 +229,15 @@
       html += '<li style="padding-left: ' + (level-1) + 'em;"><a href="#' + this.id + '"><strong>' + level + '</strong> ' + $heading.text() + '</a></li>';
     });
     html += '</ol>';
+
+    html += '<h1>Links &amp; Buttons</h1><ol id="screenreader--links">';
+    var $links = $('a[href], [role="button"][tabindex], button');
+    $links.each(function() {
+      html += '<li>' + getSpokenText(this) + '</li>';
+    });
+    html += '</ul>';
+
+    html += '</div>';
     return html;
   }
 
