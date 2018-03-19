@@ -34,15 +34,21 @@
     }
     xhr.onerror = function() {
       xhr.onload = xhr.onerror = null;
-      console.error('XHR CORS CSS fail:' + styleURI);
+      console.log('XHR CORS CSS fail:' + stylesheet_uri);
     };
     xhr.send();
   }
 
 
   function processStylesheet(value) {
-    if (value.hasOwnProperty('cssRules') && value.cssRules) {
-      var items = value.cssRules;
+    var items;
+    try {
+      items = value.rules || value.cssRules;
+    } catch (error) {
+      console.warn('Stylesheet cannot be processed, has no rules');
+      return;
+    }
+    if (items) {
       for (var i = 0; items && i < items.length; i++) {
         if (items[i].type === items[i].STYLE_RULE) {
           processStyleRule(items[i]);
@@ -57,7 +63,7 @@
     } else {
       console.log("Stylesheet can't be processed due to security restrictions. Trying to work around it.", value.href);
       value.disabled = true;
-      loadCSSCors(value.href);
+      // loadCSSCors(value.href);
     }
   }
 
