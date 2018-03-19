@@ -41,8 +41,8 @@
 
 
   function processStylesheet(value) {
-    var items = value.cssRules;
-    if (items) {
+    if (value.hasOwnProperty('cssRules') && value.cssRules) {
+      var items = value.cssRules;
       for (var i = 0; items && i < items.length; i++) {
         if (items[i].type === items[i].STYLE_RULE) {
           processStyleRule(items[i]);
